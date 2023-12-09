@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { generate } from "random-words";
 import { SECONDS, NUMB_OF_WORDS } from "./constants.js";
+import { auth } from "./firebaseConfig.js";
 
 function App() {
   const [words, setWords] = useState([]);
