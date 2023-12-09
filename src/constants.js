@@ -1,2 +1,2 @@
-export const numWords = 150 // max number of words to show
-export const time = 60 // in seconds
+export const NUMB_OF_WORDS = 200;
+export const SECONDS = 60;

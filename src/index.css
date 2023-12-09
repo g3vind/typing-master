@@ -2,16 +2,7 @@
   margin: 0;
   padding: 0;
 }
-.content {
-  /* margin: 15px; */
-  padding: 20px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  /* box-shadow: 5px 5px 10px #888888; */
-  text-align: justify;
-}
-/* INPUT BOX STYLES */
+INPUT BOX STYLES */
 /* Basic Input Styles */
 .input-section {
   display: flex;
