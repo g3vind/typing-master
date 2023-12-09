@@ -5,13 +5,32 @@ function App() {
   // state to set words to be typed
   const [words, setWords] = useState([]);
 
+  // for timer
+  const [countDown, setCountDown] = useState(time);
+
+  // to set words after each render
   useEffect(() => {
     setWords(generateWords());
   }, []);
+
   // function to generate words
   function generateWords() {
     return new Array(numWords).fill(null).map(() => generate());
   }
+
+  // function to start countdown
+  function startCountDown() {
+    let interval = setInterval(() => {
+      setCountDown((prevCountDown) => {
+        if (prevCountDown === 0) {
+          clearInterval(interval);
+        } else {
+          return prevCountDown - 1;
+        }
+      });
+    }, 1000);
+  }
+
   return (
     <div className="App">
       {/* TITLE */}
@@ -21,16 +40,21 @@ function App() {
       {/* FOR ACCURACY AND WPM */}
       <div className="section">
         <div className="is-size-1 has-text-centered has-text-primary">
-          <h2>60</h2>
+          <h2>{countDown}</h2>
         </div>
       </div>
       {/* START BUTTON */}
       <div className="section">
-        <button className="button is-info is-fullwidth">Start</button>
+        <button
+          className="button is-info is-fullwidth"
+          onClick={startCountDown}
+        >
+          Start
+        </button>
       </div>
       {/* FOR INPUT */}
       <div className="control is-expanded section">
-        <input type="text" className="input" placeholder="TYPE HERE..." />
+        <input type="text" className="input" placeholder="type here..." />
       </div>
       <div className="section">
         <div className="card">
