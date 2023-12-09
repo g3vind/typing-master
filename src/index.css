@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.content {
+  /* margin: 15px; */
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  /* box-shadow: 5px 5px 10px #888888; */
+  text-align: justify;
+}
+/* INPUT BOX STYLES */
+/* Basic Input Styles */
+.input-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 10px;
+  width: 95vw;
+  /* margin: 40px; */
+}
+
+/* Focus Styles */
+input:focus {
+  border-color: black; /* Change to a color of your choice */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change to a color of your choice */
+}
+
+/* Placeholder Styles */
+input::placeholder {
+  color: #999;
+}
+
+/* Disabled Styles */
+input:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+/* Success Styles (Example: Green border for a correct input) */
+input.correct {
+  border-color: #28a745; /* Green color */
+}
+
+/* Error Styles (Example: Red border for an incorrect input) */
+input.incorrect {
+  border-color: #dc3545; /* Red color */
+}
+
+/* Animation for success or error feedback */
+@keyframes feedbackAnimation {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25%,
+  75% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+input.correct,
+input.incorrect {
+  animation: feedbackAnimation 0.3s ease-in-out;
+}
+/* TEXT TITLE */
+.one {
+  color: black;
+}
+.two {
+  color: blue;
+}
+.title {
+  text-align: center;
+  margin-top: 20px;
+}
