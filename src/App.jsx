@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { generate } from "random-words";
 
 const difficultyLevels = {
-  easy: { numWords: 10, time: 60 },
-  medium: { numWords: 15, time: 45 },
-  hard: { numWords: 20, time: 30 },
+  easy: { numWords: 30, time: 60 },
+  medium: { numWords: 45, time: 45 },
+  hard: { numWords: 60, time: 30 },
 };
 
 function App() {
