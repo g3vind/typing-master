@@ -143,3 +143,14 @@ input.incorrect {
   padding: 13px;
   font-weight: 800;
 }
+.display {
+  display: inline-flex;
+  align-items: center;
+  margin-top: -80px;
+  margin-left: 50px;
+}
+
+.control-diff,
+.label-diff {
+  float: right;
+}

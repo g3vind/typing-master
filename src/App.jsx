@@ -1,11 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { generate } from "random-words";
-import { SECONDS, NUMB_OF_WORDS } from "./constants.js";
-import { auth } from "./firebaseConfig.js";
+
+const difficultyLevels = {
+  easy: { numWords: 10, time: 60 },
+  medium: { numWords: 15, time: 45 },
+  hard: { numWords: 20, time: 30 },
+};
 
 function App() {
   const [words, setWords] = useState([]);
-  const [countDown, setCountDown] = useState(SECONDS);
+  const [countDown, setCountDown] = useState(difficultyLevels.easy.time);
   const [currInput, setCurrInput] = useState("");
   const [currWordIndex, setCurrWordIndex] = useState(0);
   const [currCharIndex, setCurrCharIndex] = useState(-1);
@@ -13,20 +17,36 @@ function App() {
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [status, setStatus] = useState("waiting");
+  const [difficulty, setDifficulty] = useState("easy");
   const textInput = useRef(null);
 
   useEffect(() => {
     setWords(generateWords());
-  }, []);
+    setCountDown(difficultyLevels[difficulty].time);
+  }, [difficulty]);
 
   useEffect(() => {
     if (status === "started") {
       textInput.current.focus();
+      const interval = setInterval(() => {
+        setCountDown((prevCountdown) => {
+          if (prevCountdown === 0) {
+            clearInterval(interval);
+            setStatus("finished");
+            setCurrInput("");
+            return difficultyLevels[difficulty].time;
+          } else {
+            return prevCountdown - 1;
+          }
+        });
+      }, 1000);
+      return () => clearInterval(interval);
     }
-  }, [status]);
+  }, [status, difficulty]);
 
   function generateWords() {
-    return new Array(NUMB_OF_WORDS).fill(null).map(() => generate());
+    const { numWords } = difficultyLevels[difficulty];
+    return new Array(numWords).fill(null).map(() => generate());
   }
 
   function start() {
@@ -41,18 +61,6 @@ function App() {
 
     if (status !== "started") {
       setStatus("started");
-      let interval = setInterval(() => {
-        setCountDown((prevCountdown) => {
-          if (prevCountdown === 0) {
-            clearInterval(interval);
-            setStatus("finished");
-            setCurrInput("");
-            return SECONDS;
-          } else {
-            return prevCountdown - 1;
-          }
-        });
-      }, 1000);
     }
   }
 
@@ -108,7 +116,46 @@ function App() {
   return (
     <div className="App">
       <div className="section">
-        <div className="is-size-1 has-text-centered has-text-primary">
+        <label className="label">Select Difficulty:</label>
+        <div className="control">
+          <div className="select">
+            <select
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
+            >
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          {/* <div className="display">
+            <div className="section">
+              <p className="is-size-5">Difficulty Level:</p>
+              <p className="is-size-4 has-text-primary">{difficulty}</p>
+            </div>
+
+            <div className="section">
+              <p className="is-size-5">Number of Words:</p>
+              <p className="is-size-4 has-text-info">
+                {difficultyLevels[difficulty].numWords}
+              </p>
+            </div>
+
+            <div className="section">
+              <p className="is-size-5">Time:</p>
+              <p className="is-size-4 has-text-success">
+                {difficultyLevels[difficulty].time} seconds
+              </p>
+            </div>
+          </div> */}
+        </div>
+      </div>
+
+      <div className="section">
+        <div
+          style={{ marginTop: "-100px" }}
+          className="is-size-1 has-text-centered has-text-primary"
+        >
           <h2>{countDown}</h2>
         </div>
       </div>
