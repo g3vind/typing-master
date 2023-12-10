@@ -11,7 +11,7 @@ function Login({ setIsAuth }) {
       .then((result) => {
         localStorage.setItem("isAuth", true);
         setIsAuth(true);
-        navigate("/");
+        navigate("/app");
       })
       .catch((error) => {
         console.log("Caught error Popup closed", error);

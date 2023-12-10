@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
 import Login from "./pages/Login.jsx";
@@ -12,11 +12,11 @@ const RootComponent = () => {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Login setIsAuth={setIsAuth} />} />
           <Route
-            path="/"
-            element={isAuth ? <App /> : <Navigate to="/login" />}
+            path="/app"
+            element={isAuth ? <App /> : <Navigate to="/app" />}
           />
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
