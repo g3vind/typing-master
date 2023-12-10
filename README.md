@@ -10,7 +10,6 @@ Typing Master is a web application designed to improve users' typing skills. It 
 - **Dynamic Difficulty Levels:** Choose from easy, medium, and hard difficulty settings for tailored typing exercises.
 - **Real-time WPM Calculation:** Receive instant feedback on your typing speed.
 - **Accuracy Tracking:** Monitor your accuracy percentage as you type.
-- **Responsive Design:** Enjoy an optimal user experience across various devices.
 
 ## Technologies Used
 
